@@ -151,6 +151,7 @@
 		qcom,compression-mode = "dsc";
 		qcom,config-select = <&dsi_lgd_dsc_cmd_config0>;
 		qcom,ulps-enabled;
+		qcom,suspend-ulps-enabled;
 		qcom,panel-allow-phy-poweroff;
 		dsi_lgd_dsc_cmd_config0: config0 {
 			qcom,lm-split = <720 720>;

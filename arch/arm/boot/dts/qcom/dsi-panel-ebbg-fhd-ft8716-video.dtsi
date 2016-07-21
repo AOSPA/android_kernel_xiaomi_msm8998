@@ -116,6 +116,7 @@
 			39 01 00 00 01 00 02 38 00
 			];
 		qcom,ulps-enabled;
+		qcom,suspend-ulps-enabled;
 		qcom,panel-allow-phy-poweroff;
 	};
 };

@@ -682,6 +682,7 @@
 		];
 		qcom,mdss-dsi-dispparam-normal2-command-state = "dsi_hs_mode";
 		qcom,ulps-enabled;
+		qcom,suspend-ulps-enabled;
 		qcom,panel-allow-phy-poweroff;
 	};
 };
