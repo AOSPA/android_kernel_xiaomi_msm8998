@@ -81,7 +81,6 @@
 		qcom,mdss-dsi-traffic-mode = "burst_mode";
 		qcom,mdss-dsi-bllp-eof-power-mode;
 		qcom,mdss-dsi-bllp-power-mode;
-		qcom,mdss-dsi-lp11-init;
 		qcom,mdss-dsi-lane-0-state;
 		qcom,mdss-dsi-lane-1-state;
 		qcom,mdss-dsi-lane-2-state;
@@ -270,5 +269,7 @@
 				29 01 00 00 00 00 02 B0 03
 		];
 		qcom,mdss-dsi-dispparam-srgb-command-state = "dsi_hs_mode";
+		qcom,ulps-enabled;
+		qcom,panel-allow-phy-poweroff;
 	};
 };

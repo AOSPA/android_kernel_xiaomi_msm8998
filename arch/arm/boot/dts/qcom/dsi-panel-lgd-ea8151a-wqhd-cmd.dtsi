@@ -91,7 +91,6 @@
 		qcom,mdss-dsi-traffic-mode = "non_burst_sync_event";
 		qcom,mdss-dsi-bllp-eof-power-mode;
 		qcom,mdss-dsi-bllp-power-mode;
-		qcom,mdss-dsi-lp11-init;
 		qcom,mdss-dsi-lane-0-state;
 		qcom,mdss-dsi-lane-1-state;
 		qcom,mdss-dsi-lane-2-state;
@@ -156,6 +155,8 @@
 		qcom,mdss-dsi-wr-mem-continue = <0x3c>;
 		qcom,compression-mode = "dsc";
 		qcom,config-select = <&dsi_lgd_mag_dsc_cmd_config0>;
+		qcom,ulps-enabled;
+		qcom,panel-allow-phy-poweroff;
 		dsi_lgd_mag_dsc_cmd_config0: config0 {
 			qcom,lm-split = <720 720>;
 			qcom,mdss-dsc-encoders = <2>;
