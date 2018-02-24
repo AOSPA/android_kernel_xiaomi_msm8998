@@ -153,6 +153,8 @@
 		qcom,ulps-enabled;
 		qcom,suspend-ulps-enabled;
 		qcom,panel-allow-phy-poweroff;
+		qcom,partial-update-enabled = "single_roi";
+		qcom,panel-roi-alignment = <1080 8 1080 8 1080 8>;
 		dsi_lgd_dsc_cmd_config0: config0 {
 			qcom,lm-split = <720 720>;
 			qcom,mdss-dsc-encoders = <2>;
