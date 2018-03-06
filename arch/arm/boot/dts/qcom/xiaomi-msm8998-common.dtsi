@@ -1,0 +1,842 @@
+/* Copyright (c) 2016-2017, The Linux Foundation. All rights reserved.
+ * Copyright (C) 2018 XiaoMi, Inc.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+// *** Xiaomi's modification ***
+
+// msm-pm8998.dtsi start
+&spmi_bus {
+	qcom,pm8998@0 {
+		qcom,power-on@800 {
+			qcom,kpdpwr-sw-debounce;
+			qcom,pon_1 {
+				qcom,support-reset = <1>;
+				qcom,s1-timer = <4480>;
+				qcom,s2-timer = <2000>;
+				qcom,s2-type = <7>;
+			};
+
+			qcom,pon_3 {
+				qcom,s1-timer = <3072>;
+				qcom,s2-type = <PON_POWER_OFF_WARM_RESET>;
+			};
+		};
+	};
+};
+// msm-pm8998.dtsi end
+
+// msm-pmi8998.dtsi start
+&pmi8998_fg {
+	qcom,fg-memif@4400 {
+		interrupts = <0x2 0x44 0x1 IRQ_TYPE_EDGE_BOTH>,
+				<0x2 0x44 0x2 IRQ_TYPE_EDGE_BOTH>;
+		interrupt-names = "mem-xcp",
+				"dma-grant";
+	};
+};
+
+&red_led {
+	/delete-property/ linux,default-trigger;
+};
+
+&green_led {
+	/delete-property/ linux,default-trigger;
+};
+
+&blue_led {
+	/delete-property/ linux,default-trigger;
+};
+
+&pmi8998_wled {
+	qcom,switch-freq-khz = <600>;
+};
+
+&pmi8998_flash0 {
+	qcom,ires-ua = <13000>;
+};
+
+&pmi8998_flash1 {
+	qcom,ires-ua = <13000>;
+};
+
+&pmi8998_torch0 {
+	qcom,max-current = <200>;
+	qcom,current-ma = <75>;
+	qcom,ires-ua = <13000>;
+};
+
+&pmi8998_torch1 {
+	qcom,max-current = <200>;
+	qcom,current-ma = <75>;
+	qcom,ires-ua = <13000>;
+};
+// msm-pmi8998.dtsi end
+
+// msm8998-audio.dtsi start
+&snd_9335 {
+	/delete-property/ qcom,us-euro-gpios;
+	asoc-cpu = <&dai_hdmi>, <&dai_dp>,
+			<&dai_mi2s0>, <&dai_mi2s1>,
+			<&dai_mi2s2>, <&dai_mi2s3>,
+			<&dai_pri_auxpcm>, <&dai_sec_auxpcm>,
+			<&dai_tert_auxpcm>, <&dai_quat_auxpcm>,
+			<&sb_0_rx>, <&sb_0_tx>, <&sb_1_rx>, <&sb_1_tx>,
+			<&sb_2_rx>, <&sb_2_tx>, <&sb_3_rx>, <&sb_3_tx>,
+			<&sb_4_rx>, <&sb_4_tx>, <&sb_5_tx>,
+			<&afe_pcm_rx>, <&afe_pcm_tx>, <&afe_proxy_rx>,
+			<&afe_proxy_tx>, <&incall_record_rx>,
+			<&incall_record_tx>, <&incall_music_rx>,
+			<&incall_music_2_rx>, <&sb_5_rx>, <&sb_6_rx>,
+			<&sb_7_rx>, <&sb_7_tx>, <&sb_8_tx>,
+			<&usb_audio_rx>, <&usb_audio_tx>,
+			<&dai_mi2s0>, <&dai_mi2s1>,
+			<&dai_mi2s2>, <&dai_mi2s3>,
+			<&dai_pri_tdm_rx_0>, <&dai_pri_tdm_tx_0>,
+			<&dai_sec_tdm_rx_0>, <&dai_sec_tdm_tx_0>,
+			<&dai_tert_tdm_rx_0>, <&dai_tert_tdm_tx_0>,
+			<&dai_quat_tdm_rx_0>, <&dai_quat_tdm_tx_0>;
+	asoc-cpu-names = "msm-dai-q6-hdmi.8", "msm-dai-q6-dp.24608",
+			"msm-dai-q6-mi2s.0", "msm-dai-q6-mi2s.1",
+			"msm-dai-q6-mi2s.2", "msm-dai-q6-mi2s.3",
+			"msm-dai-q6-auxpcm.1", "msm-dai-q6-auxpcm.2",
+			"msm-dai-q6-auxpcm.3", "msm-dai-q6-auxpcm.4",
+			"msm-dai-q6-dev.16384", "msm-dai-q6-dev.16385",
+			"msm-dai-q6-dev.16386", "msm-dai-q6-dev.16387",
+			"msm-dai-q6-dev.16388", "msm-dai-q6-dev.16389",
+			"msm-dai-q6-dev.16390", "msm-dai-q6-dev.16391",
+			"msm-dai-q6-dev.16392", "msm-dai-q6-dev.16393",
+			"msm-dai-q6-dev.16395", "msm-dai-q6-dev.224",
+			"msm-dai-q6-dev.225", "msm-dai-q6-dev.241",
+			"msm-dai-q6-dev.240", "msm-dai-q6-dev.32771",
+			"msm-dai-q6-dev.32772", "msm-dai-q6-dev.32773",
+			"msm-dai-q6-dev.32770", "msm-dai-q6-dev.16394",
+			"msm-dai-q6-dev.16396", "msm-dai-q6-dev.16398",
+			"msm-dai-q6-dev.16399", "msm-dai-q6-dev.16401",
+			"msm-dai-q6-dev.28672", "msm-dai-q6-dev.28673",
+			"msm-dai-q6-tdm.36864", "msm-dai-q6-tdm.36865",
+			"msm-dai-q6-tdm.36880", "msm-dai-q6-tdm.36881",
+			"msm-dai-q6-tdm.36896", "msm-dai-q6-tdm.36897",
+			"msm-dai-q6-tdm.36912", "msm-dai-q6-tdm.36913",
+			"msm-dai-q6-mi2s.0", "msm-dai-q6-mi2s.1",
+			"msm-dai-q6-mi2s.2", "msm-dai-q6-mi2s.3";
+};
+
+&snd_934x {
+	/delete-property/ qcom,usbc-analog-en1_gpio;
+	/delete-property/ qcom,usbc-analog-en2_n_gpio;
+};
+
+/delete-node/ &wcd_usbc_analog_en1_gpio;
+/delete-node/ &wcd_usbc_analog_en2n_gpio;
+// msm8998-audio.dtsi end
+
+// msm8998-camera.dtsi start
+&soc {
+	qcom,ispif@ca31000 {
+		qcom,clock-control = "INIT_RATE", "NO_SET_RATE",
+			"NO_SET_RATE", "NO_SET_RATE",
+			"NO_SET_RATE",
+			"INIT_RATE", "INIT_RATE",
+			"INIT_RATE", "INIT_RATE",
+			"NO_SET_RATE", "NO_SET_RATE",
+			"NO_SET_RATE", "NO_SET_RATE",
+			"NO_SET_RATE", "NO_SET_RATE",
+			"NO_SET_RATE", "NO_SET_RATE",
+			"NO_SET_RATE", "NO_SET_RATE",
+			"NO_SET_RATE", "NO_SET_RATE",
+			"INIT_RATE",
+			"INIT_RATE", "NO_SET_RATE",
+			"INIT_RATE",
+			"INIT_RATE", "NO_SET_RATE";
+	};
+};
+
+&i2c_freq_100Khz {
+	qcom,hw-scl-stretch-en = <1>;
+};
+
+&i2c_freq_400Khz {
+	qcom,hw-scl-stretch-en = <1>;
+};
+// msm8998-camera.dtsi end
+
+// msm8998-mdss.dtsi start
+#include "xiaomi-msm8998-mdss-panels.dtsi"
+&mdss_mdp {
+	qcom,mdss-pp-offsets {
+		qcom,mdss-sspp-vig-pcc-off = <0x1780>;
+	};
+};
+// msm8998-mdss.dtsi end
+
+// msm8998-pinctrl.dtsi start
+&tlmm {
+	cam_actuator_vaf_active: cam_actuator_vaf_active {
+		mux {
+			pins = "gpio29";
+		};
+
+		config {
+			pins = "gpio29";
+		};
+	};
+
+	cam_actuator_vaf_suspend: cam_actuator_vaf_suspend {
+		mux {
+			pins = "gpio29";
+		};
+
+		config {
+			pins = "gpio29";
+		};
+	};
+
+	cam_sensor_mclk0_active: cam_sensor_mclk0_active {
+		config {
+			drive-strength = <4>;
+		};
+	};
+
+	cam_sensor_mclk0_suspend: cam_sensor_mclk0_suspend {
+		config {
+			drive-strength = <4>;
+		};
+	};
+
+	cam_sensor_mclk0_active_chiron: cam_sensor_mclk0_active_chiron {
+		/* MCLK0 */
+		mux {
+			/* CLK */
+			pins = "gpio13";
+			function = "cam_mclk";
+		};
+
+		config {
+			pins = "gpio13";
+			bias-disable; /* No PULL */
+			drive-strength = <6>; /* 2 MA */
+		};
+	};
+
+	cam_sensor_mclk0_suspend_chiron: cam_sensor_mclk0_suspend_chiron {
+		/* MCLK0 */
+		mux {
+			/* CLK */
+			pins = "gpio13";
+			function = "cam_mclk";
+		};
+
+		config {
+			pins = "gpio13";
+			bias-pull-down; /* PULL DOWN */
+			drive-strength = <6>; /* 2 MA */
+		};
+	};
+
+	cam_sensor_rear_active: cam_sensor_rear_active {
+		mux {
+			pins = "gpio30", "gpio80";
+		};
+
+		config {
+			pins = "gpio30", "gpio80";
+		};
+	};
+
+	cam_sensor_rear_suspend: cam_sensor_rear_suspend {
+		mux {
+			pins = "gpio30","gpio80";
+		};
+
+		config {
+			pins = "gpio30","gpio80";
+		};
+	};
+
+	cam_sensor_mclk1_active: cam_sensor_mclk1_active {
+		config {
+			drive-strength = <4>;
+		};
+	};
+
+	cam_sensor_mclk1_suspend: cam_sensor_mclk1_suspend {
+		config {
+			drive-strength = <4>;
+		};
+	};
+
+	cam_sensor_mclk1_active_chiron: cam_sensor_mclk1_active_chiron {
+	/* MCLK1 */
+		mux {
+		/* CLK */
+			pins = "gpio14";
+			function = "cam_mclk";
+		};
+
+		config {
+			pins = "gpio14";
+			bias-disable; /* No PULL */
+			drive-strength = <6>; /* 2 MA */
+		};
+	};
+
+	cam_sensor_mclk1_suspend_chiron: cam_sensor_mclk1_suspend_chiron {
+		/* MCLK1 */
+		mux {
+		/* CLK */
+			pins = "gpio14";
+			function = "cam_mclk";
+		};
+
+		config {
+			pins = "gpio14";
+			bias-pull-down; /* PULL DOWN */
+			drive-strength = <4>; /* 2 MA */
+		};
+	};
+
+	cam_sensor_rear2_active: cam_sensor_rear2_active {
+		mux {
+			pins = "gpio9";
+		};
+
+		config {
+			pins = "gpio9";
+		};
+	};
+
+	cam_sensor_rear2_suspend: cam_sensor_rear2_suspend {
+		mux {
+			pins = "gpio9";
+		};
+
+		config {
+			pins = "gpio9";
+		};
+	};
+
+	cam_sensor_mclk2_active: cam_sensor_mclk2_active {
+		config {
+			drive-strength = <4>;
+		};
+	};
+
+	cam_sensor_mclk2_suspend: cam_sensor_mclk2_suspend {
+		config {
+			drive-strength = <4>;
+		};
+	};
+
+	cam_sensor_front_active: cam_sensor_front_active {
+		mux {
+			pins = "gpio28", "gpio27","gpio9";
+		};
+
+		config {
+			pins = "gpio28", "gpio27","gpio9";
+		};
+	};
+
+	cam_sensor_front_suspend: cam_sensor_front_suspend {
+		mux {
+			pins = "gpio28", "gpio27","gpio9";
+		};
+
+		config {
+			pins = "gpio28", "gpio27","gpio9";
+		};
+	};
+
+	pmx_mdss: pmx_mdss {
+		mdss_dsi_active: mdss_dsi_active {
+			mux {
+				pins = "gpio94";
+			};
+
+			config {
+				pins = "gpio94";
+			};
+		};
+
+		mdss_dsi_suspend: mdss_dsi_suspend {
+			mux {
+				pins = "gpio94";
+			};
+
+			config {
+				pins = "gpio94";
+			};
+		};
+	};
+
+	ts_mux {
+		ts_reset_suspend: ts_reset_suspend {
+			config {
+				/delete-property/ bias-pull-down;
+				bias-disable;
+			};
+		};
+	};
+
+	fp_mux {
+		fp_active: fp_active {
+			mux {
+				pins = "gpio121";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio121";
+				drive-strength = <8>;
+				bias-disable;
+			};
+		};
+
+		fp_suspend: fp_suspend {
+			mux {
+				pins = "gpio121";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio121";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+	};
+
+	/* GPIO_37 : FP_RESET_N */
+	msm_gpio_37: msm_gpio_37 {
+		mux {
+			pins = "gpio37";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio37";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
+		};
+	};
+
+	/* GPIO_37 : FP_RESET_N, state device active*/
+	msm_gpio_37_output_high: msm_gpio_37_output_high {
+		mux {
+			pins = "gpio37";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio37";
+			drive-strength = <2>;
+			bias-disable;
+			output-high;
+		};
+	};
+
+	/* GPIO_121 : FP_INT_N */
+	msm_gpio_121: msm_gpio_121 {
+		mux {
+			pins = "gpio121";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio121";
+			drive-strength = <2>;
+			bias-pull-down;
+		};
+	};
+
+	/* GPIO_78 : FP_RESET_N for chiron D5*/
+	msm_gpio_78: msm_gpio_78 {
+		mux {
+			pins = "gpio78";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio78";
+			drive-strength = <2>;
+			bias-disable;
+			output-low;
+		};
+	};
+
+	/* GPIO_78 : FP_RESET_N, state device active for chiron D5*/
+	msm_gpio_78_output_high: msm_gpio_78_output_high {
+		mux {
+			pins = "gpio78";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio78";
+			drive-strength = <2>;
+			bias-disable;
+			output-high;
+		};
+	};
+
+	rcv_id {
+		rcv_id_no_pull: rcv_id_no_pull {
+			mux {
+				pins = "gpio11";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio11";
+				drive-strength = <8>;
+				bias-disable;
+				input-enable;
+			};
+		};
+		rcv_id_pull_up: rcv_id_pull_up {
+			mux {
+				pins = "gpio11";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio11";
+				drive-strength = <8>;
+				bias-pull-up;
+				input-enable;
+			};
+		};
+		rcv_id_pull_down: rcv_id_pull_down {
+			mux {
+				pins = "gpio11";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio11";
+				drive-strength = <8>;
+				bias-pull-down;
+				input-enable;
+			};
+		};
+	};
+
+	spk_id {
+		spk_id_no_pull: spk_id_no_pull {
+			mux {
+				pins = "gpio100";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio100";
+				drive-strength = <8>;
+				bias-disable;
+				input-enable;
+			};
+		};
+		spk_id_pull_up: spk_id_pull_up {
+			mux {
+				pins = "gpio100";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio100";
+				drive-strength = <8>;
+				bias-pull-up;
+				input-enable;
+			};
+		};
+		spk_id_pull_down: spk_id_pull_down {
+			mux {
+				pins = "gpio100";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio100";
+				drive-strength = <8>;
+				bias-pull-down;
+				input-enable;
+			};
+		};
+	};
+
+	gpio_rf {
+		gpio_rf_active: gpio_rf_active {
+			mux {
+				pins = "gpio119";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio119";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+		 gpio_rf_suspend: gpio_rf_suspend {
+			mux {
+				pins = "gpio119";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio119";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+	};
+};
+// msm8998-pinctrl.dtsi end
+
+// msm8998-pm.dtsi start
+&soc {
+	qcom,mpm@7781b8 {
+		qcom,gpio-map = <3  1>,
+			<4  5>,
+			<5  9>,
+			<6  11>,
+			<7  66>,
+			<8  22>,
+			<9  24>,
+			<10  26>,
+			<11  34>,
+			<12  36>,
+			<13  37>, /* PCIe0 */
+			<14  38>,
+			<15  40>,
+			<16  42>,
+			<17  46>,
+			<18  50>,
+			<0xff 52>,
+			<19  53>,
+			<20  54>,
+			<21  56>,
+			<22  57>,
+			<23  58>,
+			<24  59>,
+			<25  60>,
+			<26  61>,
+			<27  62>,
+			<28  63>,
+			<29  64>,
+			<30  71>,
+			<31  73>,
+			<32  77>,
+			<33  78>,
+			<34  79>,
+			<35  80>,
+			<36  82>,
+			<37  86>,
+			<38  91>,
+			<39  92>,
+			<40  95>,
+			<41  97>,
+			<42  101>,
+			<43  104>,
+			<44  106>,
+			<45  108>,
+			<46  112>,
+			<47  113>,
+			<48  110>,
+			<50  127>,
+			<51  115>,
+			<54  116>, /* PCIe2 */
+			<55  117>,
+			<56  118>,
+			<57  119>,
+			<58  120>,
+			<59  121>,
+			<60  122>,
+			<61  123>,
+			<62  124>,
+			<63  125>,
+			<64  126>,
+			<65  129>,
+			<66  131>,
+			<67  132>, /* PCIe1 */
+			<68  133>,
+			<69  145>;
+	};
+};
+// msm8998-pm.dtsi end
+
+// msm8998-regulator.dtsi start
+&pm8998_l6 {
+	regulator-min-microvolt = <1800000>;
+	regulator-max-microvolt = <1800000>;
+};
+
+&pm8998_l14 {
+	regulator-min-microvolt = <1800000>;
+	regulator-max-microvolt = <1800000>;
+};
+
+&soc {
+	disp_vddts_vreg: disp_vddts_vreg {
+		compatible = "regulator-fixed";
+		regulator-name = "disp_vddts_vreg";
+		startup-delay-us = <4000>;
+		enable-active-high;
+		gpio = <&tlmm 50 0>;
+	};
+
+	 fp_vdd_vreg: fp_vdd_vreg {
+		compatible = "regulator-fixed";
+		regulator-name = "fp_vdd_vreg";
+		startup-delay-us = <4000>;
+		enable-active-high;
+		gpio = <&tlmm 35 0>;
+	};
+
+	fp_d5_vdd_vreg: fp_d5_vdd_vreg {
+		compatible = "regulator-fixed";
+		regulator-name = "fp_d5_vdd_vreg";
+		startup-delay-us = <4000>;
+		enable-active-high;
+		gpio = <&tlmm 77 0>;
+	};
+};
+// msm8998-regulator.dtsi end
+
+// msm8998-v2.dtsi start
+&qusb_phy0 {
+	reg = <0x0c012000 0x2a8>,
+			<0x01fcb24c 0x4>;
+	reg-names = "qusb_phy_base",
+			"tcsr_clamp_dig_n_1p8";
+};
+// msm8998-v2.dtsi end
+
+
+// msm8998.dtsi start
+&firmware {
+	android {
+		fstab {
+			/delete-node/ vendor;
+			system {
+				compatible = "android,system";
+				dev = "/dev/block/platform/soc/1da4000.ufshc/by-name/system";
+				type = "ext4";
+				mnt_flags = "ro,barrier=1,discard";
+				fsmgr_flags = "wait,verify";
+				status = "ok";
+			};
+		};
+	};
+};
+
+/ {
+	reserved-memory {
+		/delete-node/ pil_ipa_gpu_region@95200000;
+		pil_ipa_gpu_mem: pil_ipa_gpu_region@95600000 {
+			compatible = "removed-dma-pool";
+			no-map;
+			reg = <0 0x95600000 0 0x100000>;
+		};
+
+		/delete-node/ pil_slpi_region@94300000;
+		pil_slpi_mem: pil_slpi_region@94700000 {
+			compatible = "removed-dma-pool";
+			no-map;
+			reg = <0 0x94700000 0 0xf00000>;
+		};
+
+		/delete-node/ pil_mba_region@94100000;
+		pil_mba_mem: pil_mba_region@94500000 {
+			compatible = "removed-dma-pool";
+			no-map;
+			reg = <0 0x94500000 0 0x200000>;
+		};
+
+		/delete-node/ pil_video_region@93c00000;
+		pil_video_mem: pil_video_region@94000000 {
+			compatible = "removed-dma-pool";
+			no-map;
+			reg = <0 0x94000000 0 0x500000>;
+		};
+
+		/delete-node/ modem_region@8cc00000;
+		modem_mem: modem_region@8d000000 {
+			compatible = "removed-dma-pool";
+			no-map;
+			reg = <0 0x8d000000 0 0x7000000>;
+		};
+
+		pil_adsp_mem: pil_adsp_region@0x8b200000 {
+			reg = <0 0x8b200000 0 0x1e00000>;
+		};
+	};
+};
+
+&usb3 {
+	dwc3@a800000 {
+		maximum-speed = "high-speed";
+	};
+};
+
+&soc {
+	qcom,sensor-information {
+		sensor_information28: qcom,sensor-information-28 {
+			qcom,sensor-type =  "adc";
+			qcom,sensor-name = "xo_therm";
+		};
+		sensor_information29: qcom,sensor-information-29 {
+			qcom,sensor-type = "llm";
+			qcom,sensor-name = "limits_sensor-01";
+		};
+		sensor_information30: qcom,sensor-information-30 {
+			qcom,sensor-type = "llm";
+			qcom,sensor-name = "limits_sensor-02";
+		};
+	};
+};
+
+&wdog {
+	qcom,bark-time = <20000>;
+	qcom,pet-time = <15000>;
+};
+
+&gdsc_venus {
+	clock-names = "bus_clk", "maxi_clk", "core_clk";
+	clocks = <&clock_mmss clk_mmss_video_axi_clk>,
+		<&clock_mmss clk_mmss_video_maxi_clk>,
+		<&clock_mmss clk_mmss_video_core_clk>;
+};
+
+&gdsc_venus_core0 {
+	clock-names = "core0_clk";
+	clocks = <&clock_mmss clk_mmss_video_subcore0_clk>;
+};
+
+&gdsc_venus_core1 {
+	clock-names = "core1_clk";
+	clocks = <&clock_mmss clk_mmss_video_subcore1_clk>;
+};
+
+&gdsc_camss_top {
+	ock-names = "bus_clk", "vfe_axi";
+	clocks = <&clock_mmss clk_mmss_camss_cpp_axi_clk>,
+		<&clock_mmss clk_mmss_camss_vfe_vbif_axi_clk>;
+};
+
+&gdsc_vfe0 {
+	clock-names = "core0_clk" , "core0_stream_clk";
+	clocks = <&clock_mmss clk_mmss_camss_vfe0_clk>,
+		<&clock_mmss clk_mmss_camss_vfe0_stream_clk>;
+};
+
+&gdsc_vfe1 {
+	clock-names = "core1_clk" , "core1_stream_clk";
+	clocks = <&clock_mmss clk_mmss_camss_vfe1_clk>,
+		<&clock_mmss clk_mmss_camss_vfe1_stream_clk>;
+};
+
+&gdsc_cpp {
+	clock-names = "core_clk";
+	clocks = <&clock_mmss clk_mmss_camss_cpp_clk>;
+};
+// msm8998.dtsi end
