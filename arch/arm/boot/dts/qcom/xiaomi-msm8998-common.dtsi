@@ -716,7 +716,10 @@
 &firmware {
 	android {
 		fstab {
-			/delete-node/ vendor;
+			vendor {
+				dev = "/dev/block/platform/soc/1da4000.ufshc/by-name/cust";
+				fsmgr_flags = "wait";
+			};
 			system {
 				compatible = "android,system";
 				dev = "/dev/block/platform/soc/1da4000.ufshc/by-name/system";
