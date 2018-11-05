@@ -840,14 +840,12 @@ int zs_get_page_usage(unsigned long *total_pool_pages,
 		return 0;
 	for (i = 0; i < num_devices; i++) {
 		struct zram *zram = zram_devices[i];
-		struct zram_meta *meta;
 		if (!zram)
 			return 0;
-		meta = zram->meta;
 		if (!down_read_trylock(&zram->init_lock))
 			continue;
 		if (init_done(zram)) {
-			*total_pool_pages += zs_get_total_pages(meta->mem_pool);
+			*total_pool_pages += zs_get_total_pages(zram->mem_pool);
 			*total_ori_pages += atomic64_read(
 						&zram->stats.pages_stored);
 		}
